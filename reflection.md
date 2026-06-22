@@ -5,18 +5,23 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 ## 1. What was broken when you started?
 
 - What did the game look like the first time you ran it?
+It was fine: an intuitive, direct UI with a nice button letting one see the attempts in place and the secret number only if opened for debugging.
+
 - List at least two concrete bugs you noticed at the start  
   (for example: "the hints were backwards").
+1.- Numbers out of range (0, negative numbers, anything above 100) are still counted as valid if incorrect attempts, not rejected. I expected a message telling me that they weren't allowed.
+2.- Entering ndecimals is allowed, even though it shouldn't be. I expected a notification saying the input is invalid ("no decimals"), akin to the "That's not a number" notification when one enters an alphanumeric character.
+3.- The New Game button is glitchy: Pressing may reset the secret number but one cannot enter a new guess: instead of it being recorded, the mesage displayed remains "You already won. Start a new game to play again." I expected instead to start a new game.
 
 **Bug Reproduction Log**
 
 Document at least 3 bugs you found. Add rows as needed.
 
-| Input | Expected Behavior | Actual Behavior | Console Output / Error |
-|-------|-------------------|-----------------|------------------------|
-| | | | |
-| | | | |
-| | | | |
+| Input       | Expected Behavior | Actual Behavior | Console Output / Error |
+|-------------|-------------------|-----------------|------------------------|
+|Guess of 0   |Error Message "Number out of range" |Attempt counted and hint provided (too low in this case, but varied) | None|
+| Guess of 7.5|Error Message "Invalid input please enter a whole number" |Attempt counted and hint provided |None |
+|New Game pressed |New game triggered, with new attempts allowed for a new number |"Game over. Start a new game to try again." or "You already won. Start a new game to play again." message displayed, depending on the previous result|None |
 
 ---
 
