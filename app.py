@@ -10,7 +10,6 @@ def get_range_for_difficulty(difficulty: str):
         return 1, 50
     return 1, 100
 
-
 def parse_guess(raw: str):
     if raw is None:
         return False, None, "Enter a guess."
@@ -18,15 +17,18 @@ def parse_guess(raw: str):
     if raw == "":
         return False, None, "Enter a guess."
 
-# FIXME: Logic breaks here — decimals are silently truncated instead of rejected
-# FIXME: Logic breaks here — no range validation, out-of-range numbers accepted
+    # FIX: Reject decimals explicitly instead of silently truncating
+    # FIX: Added range validation — out-of-range numbers now rejected
+    if "." in raw:
+        return False, None, "That's not a whole number. No decimals allowed."
+
     try:
-        if "." in raw:
-            value = int(float(raw))
-        else:
-            value = int(raw)
+        value = int(raw)
     except Exception:
         return False, None, "That is not a number."
+
+    if value < 1 or value > 100:
+        return False, None, "Number out of range. Enter a number between 1 and 100."
 
     return True, value, None
 
@@ -134,9 +136,12 @@ with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
 if new_game:
-# FIXME: Logic breaks here — status never reset, game stays in won/lost state
+    # FIX: Reset status to "playing" so the game doesn't stay in won/lost state
     st.session_state.attempts = 0
     st.session_state.secret = random.randint(1, 100)
+    st.session_state.status = "playing"
+    st.session_state.history = []
+    st.session_state.score = 0
     st.success("New game started.")
     st.rerun()
 
