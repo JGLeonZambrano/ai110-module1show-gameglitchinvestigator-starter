@@ -18,6 +18,8 @@ def parse_guess(raw: str):
     if raw == "":
         return False, None, "Enter a guess."
 
+# FIXME: Logic breaks here — decimals are silently truncated instead of rejected
+# FIXME: Logic breaks here — no range validation, out-of-range numbers accepted
     try:
         if "." in raw:
             value = int(float(raw))
@@ -132,6 +134,7 @@ with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
 if new_game:
+# FIXME: Logic breaks here — status never reset, game stays in won/lost state
     st.session_state.attempts = 0
     st.session_state.secret = random.randint(1, 100)
     st.success("New game started.")
