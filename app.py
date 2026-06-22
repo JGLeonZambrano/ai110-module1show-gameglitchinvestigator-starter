@@ -35,20 +35,22 @@ def parse_guess(raw: str):
 
 def check_guess(guess, secret):
     if guess == secret:
-        return "Win", "🎉 Correct!"
+        return "Win", "🎉 Correct! You got it!"
 
     try:
+        # FIX: Corrected inverted hint logic — was returning 'Too High' when guess
+        # was greater than secret, but the message said 'Go HIGHER!' (contradictory)
         if guess > secret:
-            return "Too High", "📈 Go HIGHER!"
+            return "Too High", "🔽 Too high! Go LOWER!"
         else:
-            return "Too Low", "📉 Go LOWER!"
+            return "Too Low", "🔼 Too low! Go HIGHER!"
     except TypeError:
         g = str(guess)
         if g == secret:
             return "Win", "🎉 Correct!"
         if g > secret:
-            return "Too High", "📈 Go HIGHER!"
-        return "Too Low", "📉 Go LOWER!"
+            return "Too High", "🔽 Too high! Go LOWER!"
+        return "Too Low", "🔼 Too low! Go HIGHER!"
 
 
 def update_score(current_score: int, outcome: str, attempt_number: int):

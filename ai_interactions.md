@@ -10,15 +10,15 @@
 
 **What task did you give the agent?**
 
-<!-- Describe the goal you asked the agent to accomplish -->
+Fix the inverted hint logic in `check_guess()` in `app.py` and improve the hint messages with emoji-coded directional feedback for better player experience.
 
 **What did the agent do?**
 
-<!-- List the steps the agent took (files edited, commands run, etc.) -->
+Claude identified that the outcome labels ("Too High", "Too Low") were correct but the human-readable messages were swapped. It modified `check_guess()` to return 🔽 "Too high! Go LOWER!" when guess > secret, and 🔼 "Too low! Go HIGHER!" when guess < secret.
 
 **What did you have to verify or fix manually?**
 
-<!-- Describe anything the agent got wrong or that required human review -->
+I manually tested both directions using the Developer Debug Info panel to confirm the secret number (15), then verified guessing 16 showed "Go LOWER!" and guessing 14 showed "Go HIGHER!" before committing.
 
 ---
 

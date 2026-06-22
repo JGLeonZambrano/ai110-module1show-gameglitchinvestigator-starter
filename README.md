@@ -54,4 +54,11 @@ tests/test_game_logic.py .....                                           [100%]
 ```
 
 ## 🚀 Stretch Features
-- [ ] [If you choose to complete Challenge 4, describe the Enhanced UI changes here]
+
+### ✅ Challenge 4: Enhanced Game UI
+The hint messages in `check_guess()` (in `app.py`) were inverted — a guess that 
+was too high showed "Go HIGHER!" and vice versa. Using AI assistance, the messages 
+were corrected to use emoji-coded directional hints: 🔽 "Too high! Go LOWER!" and 
+🔼 "Too low! Go HIGHER!" The fix improves player experience by making hints 
+immediately clear, and was verified manually using the Developer Debug Info panel 
+to confirm correct behavior against a known secret number.
